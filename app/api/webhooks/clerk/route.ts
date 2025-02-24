@@ -2,7 +2,7 @@ import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 // import { connectDB } from '@/lib/db';
-import dbConnect from '@/lib/mongoose';
+import { connectToDatabase } from '@/lib/mongoose';
 import User from '@/lib/models/User';
 
 export async function POST(req: Request) {
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     return new Response(`Unauthorized ${err}`, { status: 401 });
   }
 
-  await dbConnect();
+  await connectToDatabase();
 
   switch (evt.type) {
     case 'user.created':
