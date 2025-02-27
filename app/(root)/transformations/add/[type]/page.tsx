@@ -6,10 +6,11 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 
-const AddTransformationTypePage = async({params:{type}}:SearchParamProps) => {
+const AddTransformationTypePage = async ({params: {type} }:SearchParamProps) => {
     const authResult = await auth();
     const { userId } = authResult;
     const transformation = transformationTypes[type];
+
     if(!userId) redirect('/sign-in');
 
     const user = await getUserById(userId);
